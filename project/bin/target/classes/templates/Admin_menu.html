@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: #335179;
+        font-family: "Roboto", sans-serif;
+        background-image: url('https://i.ibb.co/PZrY9ns/login-background.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+    .logout {
+        background-color: #335179;
+        font-family: "Roboto", sans-serif;
+        background-image: url('https://i.ibb.co/PZrY9ns/login-background.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+    h1 {
+        text-align: center;
+        padding-top: 15px;
+        color: white;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    form {
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+        outline: none;
+        border: none;
+    }
+
+    .menu {
+        height: 520px;
+        width: 400px;
+        background-color: rgba(255, 255, 255, 0.13);
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        padding: 50px 35px;
+
+    }
+
+    form label {
+        display: flex;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    form input {
+        width: 100%;
+        padding: 7px;
+        border: none;
+        border: 1px solid gray;
+        border-radius: 6px;
+        outline: none;
+    }
+
+    input[type="button"] {
+        width: 320px;
+        height: 35px;
+        margin-top: 20px;
+        border: none;
+        background-color: #439696;
+        color: white;
+        font-size: 18px;
+    }
+
+    p {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 15px;
+    }
+
+    input[type="button"]:hover {
+        background-color: #303a39;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, 0.13);
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+
+    .active {
+        background-color: #335179;
+    }
+
+</style>
+<div class="menu">
+    <h1>Μενού</h1>
+    <form>
+        <input type="button" value="Διαγραφή χρήστη" id="deleteUser_id"/>
+        <input type="button" value="Προσθήκη χρήστη" id="addUser_id"/>
+        <input type="button" value="Επεξεργασία χρήστη" id="editUser_id"/>
+    </form>
+</div>
+<div class="logout">
+    <li style="float:right"><a class="active" href="LoginPage.html">Logout</a></li>
+</div>
+</body>
+</html>
+</html>
