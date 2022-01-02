@@ -51,6 +51,20 @@ public class UserService implements UserServiceInterface {
         return repoUser.findById(id).get();
     }
 
+    public User getUserByUsername(String username) {
+        return repoUser.getUserByUsername(username);
+    }
+
+    public List<User> getAllTeachers() {
+        List<User> userList = (List<User>) repoUser.findAll();
+        for (int i = 0; i<userList.size(); i++) {
+            if (!userList.get(i).getRoles().contains("TEACHER")) {
+                userList.remove(i);
+            }
+        }
+        return userList;
+    }
+
     @Override
     public void delete(Long id) {
         repoUser.deleteById(id);

@@ -24,7 +24,7 @@
         <tr th:each="r : ${listRequests}">
             <td th:text="${r.id}">Id</td>
             <td th:text="${r.status}">status</td>
-            <td th:text="${r.purpose}">purpose</td>
+            <td th:text="${r.purpose}">status</td>
         </tr>
 
         </tbody>
@@ -32,7 +32,7 @@
     </table>
 </div>
 <div>
-<a th:href = "@{/student/home}"> Go back</a>
+    <a th:href = "@{/student/home}"> Go back</a>
 </div>
 </body>
 </html>

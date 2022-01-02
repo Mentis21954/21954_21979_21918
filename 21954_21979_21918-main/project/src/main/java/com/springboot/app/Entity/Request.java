@@ -3,6 +3,10 @@ package com.springboot.app.Entity;
 import com.springboot.app.Entity.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "requests")
@@ -14,7 +18,7 @@ public class Request {
     @Column(name = "purpose", nullable = false, length = 45)
     private String purpose;
 
-    @Column(name = "status", nullable = false, length = 45)
+    @Column(name = "status", length = 45)
     private String status;
 
     @ManyToOne(optional = false)
@@ -23,6 +27,7 @@ public class Request {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "receiver_id", nullable = false)
+
     private User receiver;
 
     public User getReceiver() {
@@ -64,4 +69,5 @@ public class Request {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }

@@ -14,17 +14,17 @@
     <h1>Menu</h1>
     <ul>
     <form>
-        <a class="btn btn-primary" th:href = "@{/user/showAllRequests}" >View letters of recommendation</a>
+        <a class="btn btn-primary" th:href = "@{/student/viewLetters}" >View letters of recommendation</a>
         <br>
-        <a class="btn btn-primary" th:href = "@{/user/showAllRequests}" >View requests</a>
+        <a class="btn btn-primary" th:href = "@{/student/showRequests}" >View requests</a>
         <br>
-        <a class="btn btn-primary" th:href = "@{/user/showAllRequests}" >Sending a letter of recommendation</a>
+        <a class="btn btn-primary" th:href = "@{/student/addRequest}" >Sending a letter of recommendation</a>
     </form>
     </ul>
 </div>
 <div class="logout">
     <ul>
-        <li style="float:right"><a class="active" th:href="@{/login}">Logout</a></li>
+        <li ><a class="active" th:href="@{/login}">Logout</a></li>
     </ul>
 </div>
 </body>

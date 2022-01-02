@@ -3,11 +3,14 @@ package com.springboot.app.Entity;
 import com.springboot.app.Entity.Request;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "lessons")
 public class Lesson {
     @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @Column(name = "lesson_id", nullable = false)
     private Integer id;
 
@@ -20,6 +23,17 @@ public class Lesson {
     @ManyToOne(optional = false)
     @JoinColumn(name = "requests_id", nullable = false)
     private Request requests;
+
+    @Column(name = "semester", nullable = false)
+    private Integer semester;
+
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
+    }
 
     public Request getRequests() {
         return requests;
@@ -52,4 +66,8 @@ public class Lesson {
     public void setId(Integer id) {
         this.id = id;
     }
-}
+
+    @Override
+    public String toString() {
+        return this.name +" "+this.grade+" "+this.semester;
+    }}

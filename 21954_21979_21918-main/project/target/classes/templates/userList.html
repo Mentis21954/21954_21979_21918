@@ -29,11 +29,16 @@
 
 
             <td> <a th:href="@{/admin/showFormUpdate/{id}(id=${User.id})}" class="btn btn-primary">Update</a>
-                <a th:href="@{/admin/deleteRequest/{id}}(id=${User.id})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/admin/deleteUser/{id}(id=${User.id})}" class="btn btn-danger">Delete</a>
         </tr>
         </tbody>
 
     </table>
+</div>
+<div class="logout">
+    <ul>
+        <li ><a class="active" th:href="@{/login}">Logout</a></li>
+    </ul>
 </div>
 </body>
 </html>

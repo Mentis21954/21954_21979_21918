@@ -13,11 +13,6 @@ import java.util.Optional;
 
 @Service
 public class RequestService implements RequestServiceInterface{
-    @Autowired
-    private UserRepository repoUser;
-
-    @Autowired
-    private RoleRepository repoRole;
 
     @Autowired
     private RequestRepository repoReq ;
@@ -35,18 +30,43 @@ public class RequestService implements RequestServiceInterface{
 
     @Override
     public Request getRequestById(long id) {
-        Optional<Request> optional = repoReq.findById(id);
-        Request request = null;
-        if (optional.isPresent()) {
-            request = optional.get();
-        } else {
-            throw new RuntimeException(" Request not found for id :: " + id);
-        }
-        return request;
+        return repoReq.getById(id);
     }
 
     @Override
     public void deleteRequestById(long id) {
         this.repoReq.deleteById(id);
     }
+
+    public List<Request> getStudentRequests(Long id) {
+        List<Request> requestlist =  repoReq.findAll();
+        for(int i=0 ; i<requestlist.size(); i++) {
+            if(!requestlist.get(i).getReceiver().getId().equals(id)) {
+                requestlist.remove(i);
+            }
+        }
+        return requestlist;
+    }
+
+    public List<Request> getStudentRequests(String username) {
+        List<Request> requestlist =  repoReq.findAll();
+        for(int i=0 ; i<requestlist.size(); i++) {
+            if(!(requestlist.get(i).getReceiver().getUsername().equals(username))) {
+                requestlist.remove(i);
+            }
+        }
+        return requestlist;
+    }
+
+    public List<Request> viewUserLetters(Long id) {
+        List<Request> requestlist =  repoReq.findAll();
+        for(int i=0 ; i<requestlist.size(); i++) {
+            if((!requestlist.get(i).getId().equals(id)) || requestlist.get(i).getStatus().equals("pending")) {
+                requestlist.remove(i);
+            }
+        }
+        return requestlist;
+    }
+
+
 }

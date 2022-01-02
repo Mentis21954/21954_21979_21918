@@ -11,28 +11,29 @@
 <body>
 <div class="container my-2">
     <h1>Request List</h1>
-    <a th:href = "@{/student/showRequests}" class="btn btn-primary btn-sm mb-3">Show Request</a>
+    <a th:href = "@{/teacher/r}" class="btn btn-primary btn-sm mb-3">Request List</a>
     <table border="1" class = "table table-striped table-responsive-md">
         <thead>
         <tr>
-            <th>Request id</th>
-            <th>Request status</th>
+            <th>User username</th>
+            <th>User id</th>
+            <th>User roles</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="r : ${listRequests}">
+        <tr th:each="r : ${requestList}">
             <td th:text="${r.id}">Id</td>
             <td th:text="${r.status}">status</td>
             <td th:text="${r.purpose}">purpose</td>
         </tr>
-
         </tbody>
-
     </table>
 </div>
-<div>
-<a th:href = "@{/student/home}"> Go back</a>
+<div class="logout">
+    <ul>
+        <li ><a class="active" th:href="@{/login}">Logout</a></li>
+    </ul>
 </div>
 </body>
 </html>
