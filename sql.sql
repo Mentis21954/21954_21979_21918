@@ -127,3 +127,15 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+insert into users (user_id,username,password,enabled) values ('2','admin@gmail.com','$2a$10$bmP1YtbOwxFlOjckWl6VZugttUHMqbCBg6INMZFSbYo4JVD77Tpwy',1);
+insert into users (user_id,username,password,enabled) values ('1','teacher@gmail.com','$2a$10$bmP1YtbOwxFlOjckWl6VZugttUHMqbCBg6INMZFSbYo4JVD77Tpwy',1);
+insert into users (user_id,username,password,enabled) values ('3','student@gmail.com','$2a$10$bmP1YtbOwxFlOjckWl6VZugttUHMqbCBg6INMZFSbYo4JVD77Tpwy',1);
+
+
+insert into roles (role_id,name) values('1','ADMIN');
+insert into roles (role_id,name) values('2','STUDENT');
+insert into roles (role_id,name) values('3','TEACHER');
+insert into users_roles(user_id,role_id) VALUES('1','3');
+insert into users_roles(user_id,role_id)  VALUES('2','1');
+insert into users_roles(user_id,role_id)  VALUES('3','2');
