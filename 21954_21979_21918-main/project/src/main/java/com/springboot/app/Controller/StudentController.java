@@ -32,16 +32,22 @@ public class StudentController {
 
     @GetMapping("/home")
     public String homeStudentPage(Model model) {
+
         return "Student_menu";
     }
 
     private Request request2;
 
-    @GetMapping("/addRequest")
-    public String addNewRequest(Model model) {
+    public User getLoginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = service.getUserByUsername(username);
+        return user;
+    }
+
+    @GetMapping("/addRequest")
+    public String addNewRequest(Model model) {
+        User user = getLoginUser();
         List<User> userList = service.getAllTeachers();
 
         Request request = new Request();
@@ -68,7 +74,9 @@ public class StudentController {
     @GetMapping("/addLesson")
     public String addLesson(Model model) {
         Lesson lesson = new Lesson();
+        List<Lesson> lessonList = lessonService.getStudentLesson(request2.getId());
         model.addAttribute("lesson",lesson);
+        model.addAttribute("lessonList", lessonList);
         return "new_lesson";
     }
 
@@ -77,7 +85,6 @@ public class StudentController {
     public String saveLesson(@ModelAttribute("lesson") Lesson lesson) {
         // save request to database
         lesson.setRequests(request2);
-        lesson.setId(1);
         lessonService.saveLesson(lesson);
         return "redirect:/student/addLesson";
     }
@@ -86,9 +93,7 @@ public class StudentController {
     @GetMapping("/showRequests")
     public String showNewEmployeeForm(Model model) {
         // create model attribute to bind form data
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = service.getUserByUsername(username);
+        User user = getLoginUser();
         List<Request> requestList = requestService.getStudentRequests(user.getId());
         model.addAttribute("listRequests", requestList);
         return "requestList";
@@ -105,11 +110,5 @@ public class StudentController {
         return "lettersList";
     }
 
-    @GetMapping("/deleteRequest/{id}")
-    public String deleteEmployee(@PathVariable(value = "id") long id) {
 
-        // call delete request method
-        this.requestService.deleteRequestById(id);
-        return "redirect:/user/requestList";
-    }
 }

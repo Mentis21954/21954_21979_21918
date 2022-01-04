@@ -15,7 +15,7 @@ public class RecommendationLetter {
     @Column(name = "text", nullable = false)
     private Integer text;
 
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "requests_id", nullable = false)
     private Request requests;
 

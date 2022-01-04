@@ -17,15 +17,30 @@
                     <input type="hidden" th:field="*{id}">
             <td>Lesson grade:</td>
             <input type="text" th:field="*{grade}">
+        <br>
             <td>Lesson name:</td>
             <input type="text" th:field="*{name}">
+        <br>
             <td>Lesson semester:</td>
             <input type="number" th:field="*{semester}">
+        <br>
                 <button type="submit">Add Lesson</button></td>
+        <br>
+        <tr th:each="l : ${lessonList}">
+            <td>Lesson name:</td>
+            <td th:text="${l.name}"></td>
+            <br>
+            <td>Lesson semester:</td>
+            <td th:text="${l.semester}"></td>
+            <br>
+            <td>Grade:</td>
+            <td th:text="${l.grade}"></td>
+            <br>
+        </tr>
 
     </form>
 </div>
-<a th:href = "@{/student/addRequest}"> Back to request</a>
+<a th:href = "@{/student/home}"> Save request & go back to menu</a>
 </div>
 </body>
 </html>

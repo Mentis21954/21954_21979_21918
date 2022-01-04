@@ -41,5 +41,4 @@ public class Role {
         return this.name;
     }
 
-
 }

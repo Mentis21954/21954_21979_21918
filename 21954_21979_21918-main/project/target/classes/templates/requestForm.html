@@ -15,13 +15,15 @@
     <form action="#" th:action="@{/student/saveRequest}" th:object="${request}" method="post">
         <tr>
             <td>Purpose:</td>
+            <br>
             <select name="Purpose" th:field="*{purpose}">
                 <option value="Work">Work</option>
                 <option value="School">School</option>
             </select>
         </tr>
+        <br>
         <tr>
-            <td>Receiver:</td>
+            <tr>Receiver:</tr>
             <div class="col-8" th:field="${userList}">
                 <th:block th:each="u: ${userList}">
                     <input type="checkbox" th:field="*{receiver} "
@@ -38,7 +40,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <button type="submit">Save request</button>
+                <button type="submit">Continue</button>
             </td>
         </tr>
     </form>

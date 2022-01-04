@@ -2,6 +2,7 @@ package com.springboot.app.Service;
 
 
 import java.util.List;
+import java.util.Set;
 
 import com.springboot.app.Entity.Role;
 import com.springboot.app.Entity.User;
@@ -57,9 +58,10 @@ public class UserService implements UserServiceInterface {
 
     public List<User> getAllTeachers() {
         List<User> userList = (List<User>) repoUser.findAll();
-        for (int i = 0; i<userList.size(); i++) {
-            if (!userList.get(i).getRoles().contains("TEACHER")) {
-                userList.remove(i);
+        Role role = repoRole.findByName("TEACHER");
+        for (int i = userList.size(); i>0; i--) {
+            if (!userList.get(i-1).getRoles().contains(role)) {
+                userList.remove(userList.get(i-1));
             }
         }
         return userList;
