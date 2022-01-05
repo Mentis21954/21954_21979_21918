@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/student/deleteRequest}" th:object="${request}" method="post">
+
+<tr th:each="l : ${lessonList}">
+    <td th:text="${l.name}">Name</td>
+    <td th:text="${l.semester}">Semester</td>
+    <td th:text="${l.requests.receiver}">Receiver</td>
+</tr>
+</form>
+</body>
+</html>
