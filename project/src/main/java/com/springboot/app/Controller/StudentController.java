@@ -43,7 +43,7 @@ public class StudentController {
         return "student_menu";
     }
 
-    private Request request2;
+    private Request global_request;
 
     public User getLoginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -60,7 +60,7 @@ public class StudentController {
         Request request = new Request();
 
         request.setSender(user);
-        request.setStatus("pending");
+        request.setStatus("Pending");
 
         model.addAttribute("user", user);
         model.addAttribute("request", request);
@@ -70,10 +70,19 @@ public class StudentController {
     }
 
 
+    @RequestMapping(value = "/sendRequest",method = RequestMethod.GET)
+    public String acceptRequest() {
+        Request request = requestService.getRequestById(global_request.getId());
+        request.setStatus("Ready");
+        requestService.saveRequest(request);
+        return "redirect:/student/home";
+    }
+
+
     @PostMapping("/saveRequest")
     public String saveRequest(@ModelAttribute("request") Request request) {
         // save request to database
-        request2 = request;
+        global_request = request;
         requestService.saveRequest(request);
         return "redirect:/student/addLesson";
     }
@@ -81,7 +90,7 @@ public class StudentController {
     @GetMapping("/addLesson")
     public String addLesson(Model model) {
         Lesson lesson = new Lesson();
-        List<Lesson> lessonList = lessonService.getStudentLesson(request2.getId());
+        List<Lesson> lessonList = lessonService.getStudentLesson(global_request.getId());
         model.addAttribute("lesson",lesson);
         model.addAttribute("lessonList", lessonList);
         return "new_lesson";
@@ -91,7 +100,7 @@ public class StudentController {
     @PostMapping("/saveLesson")
     public String saveLesson(@ModelAttribute("lesson") Lesson lesson) {
         // save request to database
-        lesson.setRequests(request2);
+        lesson.setRequests(global_request);
         lessonService.saveLesson(lesson);
         return "redirect:/student/addLesson";
     }
@@ -104,6 +113,13 @@ public class StudentController {
         String username = auth.getName();
         User user = service.getUserByUsername(username);
         List<Request> requestList = requestService.getStudentRequests(user.getId());
+
+        for(int i=0 ; i<requestList.size() ; i++) {
+            if(requestList.get(i).getStatus().equals("Pending")) {
+                requestList.remove(i);
+            }
+        }
+
         model.addAttribute("listRequests", requestList);
         return "requestList";
     }
@@ -119,19 +135,18 @@ public class StudentController {
     @GetMapping("/viewMore/{id}")
     public String viewLetters(@PathVariable (value = "id") long id, Model model) {
         model.addAttribute("letter", letterService.getLetterById(id));
-        if (letterService.getLetterById(id).getRequests().getStatus().equals("Accepted")) {
-            return "viewAccepted";
-
-        } else {
-            return "viewRejected";
-        }
+        return "viewAccepted";
     }
 
     @GetMapping("/download/{id}")
     public void downloadLetter(@PathVariable (value = "id") long id, HttpServletResponse response) throws IOException {
         RecommendationLetter letter = letterService.getLetterById(id);
 
-        File file = new File(new File(".").getAbsolutePath()+"recommendationLetter.txt");
+        File file = new File(new File(".").getAbsolutePath()+" letter.txt");
+
+        if(!file.canWrite())
+            file.setWritable(true);
+
         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
         writer.write(letter.getText());
         writer.close();

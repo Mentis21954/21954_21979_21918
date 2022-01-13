@@ -23,7 +23,7 @@
 
             <tbody>
             <td>
-            <select name="Purpose" th:field="*{purpose}">
+            <select name="Purpose" th:field="*{purpose}" >
                 <option value="Work">Work</option>
                 <option value="School">School</option>
             </select>
@@ -31,8 +31,8 @@
             <td>
             <div class="col-8" th:field="${userList}">
                 <th:block th:each="u: ${userList}">
-                    <input type="checkbox" th:field="*{receiver} "
-                           th:text="${u.username}" th:value="${u.id}" class="m-2"/>
+                    <input type="checkbox" th:field="*{receiver}"
+                           th:text="${u.username}" th:value="${u.id}" class="m-2" required/>
                 </th:block>
             </div>
             </td>

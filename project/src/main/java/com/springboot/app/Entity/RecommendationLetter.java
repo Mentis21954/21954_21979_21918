@@ -4,7 +4,7 @@ package com.springboot.app.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "recommendationletter")
+@Table(name = "recommendation_letter")
 public class RecommendationLetter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class RecommendationLetter {
     @JoinColumn(name = "requests_id", nullable = false)
     private Request requests;
 
-    @Column(name = "text", nullable = false, length = 16383)
+    @Column(name = "text", nullable = false, length = 1000)
     private String text;
 
     public String getText() {

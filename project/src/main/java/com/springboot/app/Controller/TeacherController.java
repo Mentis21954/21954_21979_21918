@@ -49,6 +49,12 @@ public class TeacherController {
         User user = getLoginUser();
         List<Request> requestList = requestService.getTeacherRequests(user.getId());
 
+        for(int i=0 ; i<requestList.size() ; i++) {
+            if(requestList.get(i).getStatus().equals("Pending")) {
+                requestList.remove(i);
+            }
+        }
+
         model.addAttribute("listRequests", requestList );
         model.addAttribute("counts",letterService.countLetters(requestList));
         return "teacher_menu";

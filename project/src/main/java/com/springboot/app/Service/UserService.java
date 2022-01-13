@@ -77,18 +77,23 @@ public class UserService implements UserServiceInterface {
         for(int i =0 ; i<lessons.size();i++){
             repoLesson.deleteById(lessons.get(i).getId());
         }
-        List<RecommendationLetter> recommendationLetters = letterRepository.getTeacherLettersById(id);
+
+        List<RecommendationLetter> recommendationLetters = letterRepository.getStudentLettersById(id);
+        List<RecommendationLetter> recommendationLetters2 = letterRepository.getTeacherLettersById(id);
         for(int i =0 ; i<recommendationLetters.size();i++){
-            requestRepository.deleteById(Long.valueOf(recommendationLetters.get(i).getId()));
+            letterRepository.deleteById(recommendationLetters.get(i).getId());
+        }
+        for(int i =0 ; i<recommendationLetters2.size();i++){
+            letterRepository.deleteById(recommendationLetters2.get(i).getId());
         }
 
         List<Request> requestList = requestRepository.getStudentRequests(id);
-
         for(int i =0 ; i<requestList.size();i++){
             requestRepository.deleteById(requestList.get(i).getId());
         }
 
-       repoUser.getUserById(id).removeRoles();
+        repoUser.getUserById(id).removeRoles();
+
 
         repoUser.deleteById(id);
     }
