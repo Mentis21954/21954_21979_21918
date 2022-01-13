@@ -107,7 +107,7 @@ public class StudentController {
 
 
     @GetMapping("/showRequests")
-    public String showNewEmployeeForm(Model model) {
+    public String showRequest(Model model) {
         // create model attribute to bind form data
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
