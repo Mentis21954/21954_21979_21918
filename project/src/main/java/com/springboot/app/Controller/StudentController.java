@@ -142,7 +142,7 @@ public class StudentController {
     public void downloadLetter(@PathVariable (value = "id") long id, HttpServletResponse response) throws IOException {
         RecommendationLetter letter = letterService.getLetterById(id);
 
-        File file = new File(new File(".").getAbsolutePath()+"recommendationletter.txt");
+        File file = new File(new File(".").getAbsolutePath()+"recommendationLetter.txt");
 
         if(!file.canWrite())
             file.setWritable(true);
