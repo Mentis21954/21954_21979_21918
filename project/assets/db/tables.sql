@@ -80,7 +80,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `login_db`.`recommendationLetter`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `login_db`.`recommendationLetter` (
+CREATE TABLE IF NOT EXISTS `login_db`.`recommendation_letter` (
   `letter_id` BIGINT NOT NULL AUTO_INCREMENT,
   `text` TEXT NOT NULL,
   `requests_id` BIGINT NOT NULL,
