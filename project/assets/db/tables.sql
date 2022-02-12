@@ -22,7 +22,7 @@ USE `login_db` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `login_db`.`users` (
   `user_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `enabled` INT(1) NOT NULL,
+  `enabled` INT NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `username` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`user_id`),
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `login_db`.`requests` (
   `status` VARCHAR(45) NOT NULL,
   `receiver_id` BIGINT NOT NULL,
   `sender_id` BIGINT NOT NULL,
+  `timestamp` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `FK8kh2eaehckhr55seyhe5k7vdy` (`receiver_id` ASC) VISIBLE,
   INDEX `FKg1js12lxokyqtj936eqv1mvmx` (`sender_id` ASC) VISIBLE,
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `login_db`.`requests` (
     FOREIGN KEY (`sender_id`)
     REFERENCES `login_db`.`users` (`user_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 19
+AUTO_INCREMENT = 22
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -72,26 +73,26 @@ CREATE TABLE IF NOT EXISTS `login_db`.`lessons` (
     FOREIGN KEY (`requests_id`)
     REFERENCES `login_db`.`requests` (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `login_db`.`recommendationLetter`
+-- Table `login_db`.`recommendation_letter`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `login_db`.`recommendationLetter` (
+CREATE TABLE IF NOT EXISTS `login_db`.`recommendation_letter` (
   `letter_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `text` VARCHAR(1000) NOT NULL,
+  `text` TEXT NOT NULL,
   `requests_id` BIGINT NOT NULL,
+  `timestamp` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`letter_id`),
   INDEX `fk_recommendationLetter_requests1_idx` (`requests_id` ASC) VISIBLE,
   CONSTRAINT `fk_recommendationLetter_requests1`
     FOREIGN KEY (`requests_id`)
-    REFERENCES `login_db`.`requests` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `login_db`.`requests` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
