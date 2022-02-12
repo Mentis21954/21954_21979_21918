@@ -18,6 +18,17 @@ public class RecommendationLetter {
     @Column(name = "text", nullable = false, length = 1000)
     private String text;
 
+    @Column(name = "timestamp", nullable = false, length = 45)
+    private String timestamp;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public String getText() {
         return text;
     }

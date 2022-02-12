@@ -19,6 +19,8 @@ import com.springboot.app.Service.RequestService;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -73,15 +75,22 @@ public class StudentController {
     @RequestMapping(value = "/sendRequest",method = RequestMethod.GET)
     public String acceptRequest() {
         Request request = requestService.getRequestById(global_request.getId());
-        request.setStatus("Ready");
+        request.setStatus("has been send");
         requestService.saveRequest(request);
         return "redirect:/student/home";
     }
 
+    private String getTime() {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
+    }
 
     @PostMapping("/saveRequest")
     public String saveRequest(@ModelAttribute("request") Request request) {
         // save request to database
+        request.setTimestamp(getTime());
         global_request = request;
         requestService.saveRequest(request);
         return "redirect:/student/addLesson";
@@ -108,10 +117,7 @@ public class StudentController {
 
     @GetMapping("/showRequests")
     public String showRequest(Model model) {
-        // create model attribute to bind form data
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        User user = service.getUserByUsername(username);
+        User user = getLoginUser();
         List<Request> requestList = requestService.getStudentRequests(user.getId());
 
         for(int i=0 ; i<requestList.size() ; i++) {
@@ -142,7 +148,7 @@ public class StudentController {
     public void downloadLetter(@PathVariable (value = "id") long id, HttpServletResponse response) throws IOException {
         RecommendationLetter letter = letterService.getLetterById(id);
 
-        File file = new File(new File(".").getAbsolutePath()+"recommendationLetter.txt");
+        File file = new File(new File(".").getAbsolutePath()+" letter.txt");
 
         if(!file.canWrite())
             file.setWritable(true);

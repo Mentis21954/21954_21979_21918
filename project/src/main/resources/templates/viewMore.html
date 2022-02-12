@@ -14,6 +14,7 @@
     <table border="1" class="table table-striped table-responsive-md">
         <thead>
         <tr>
+            <th>Timestamp</th>
             <th>Request id</th>
             <th>Sender</th>
             <th>Status</th>
@@ -21,6 +22,7 @@
         </thead>
         <tbody>
         <tr th:object="${letter}">
+            <td th:text="${letter.requests.timestamp}"></td>
             <td th:text="${letter.requests.id}"></td>
             <td th:text="${letter.requests.receiver.username}"></td>
             <td th:text="${letter.requests.status}"></td>

@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -41,6 +43,13 @@ public class TeacherController {
         String username = auth.getName();
         User user = userService.getUserByUsername(username);
         return user;
+    }
+
+    private String getTime() {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
     }
 
     @GetMapping("/home")
@@ -74,6 +83,7 @@ public class TeacherController {
     @RequestMapping(value = "/acceptRequest",method = RequestMethod.GET)
     public String acceptRequest() {
         Request request = requestService.getRequestById(global_request.getId());
+        request.setTimestamp(getTime());
         request.setStatus("Accepted");
         requestService.saveRequest(request);
         return "redirect:/teacher/writeLetter";
@@ -82,6 +92,7 @@ public class TeacherController {
     @RequestMapping (value = "/rejectRequest",method = RequestMethod.GET)
     public String rejectRequest() {
         Request request = requestService.getRequestById(global_request.getId());
+        request.setTimestamp(getTime());
         request.setStatus("Rejected");
         requestService.saveRequest(request);
         return "redirect:/teacher/home";
@@ -97,6 +108,7 @@ public class TeacherController {
     @PostMapping("/saveLetter")
     public String saveLetter(@ModelAttribute("letter") RecommendationLetter letter){
         letter.setRequests(global_request);
+        letter.setTimestamp(getTime());
         letterService.saveLetter(letter);
         return "redirect:/teacher/home";
     }

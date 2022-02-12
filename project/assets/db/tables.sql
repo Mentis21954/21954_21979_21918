@@ -80,9 +80,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table `login_db`.`recommendationLetter`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `login_db`.`recommendation_letter` (
+CREATE TABLE IF NOT EXISTS `login_db`.`recommendationLetter` (
   `letter_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `text` TEXT NOT NULL,
+  `text` VARCHAR(1000) NOT NULL,
   `requests_id` BIGINT NOT NULL,
   PRIMARY KEY (`letter_id`),
   INDEX `fk_recommendationLetter_requests1_idx` (`requests_id` ASC) VISIBLE,

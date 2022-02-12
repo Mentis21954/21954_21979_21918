@@ -24,6 +24,17 @@ public class Request {
     @JoinColumn(name = "receiver_id", nullable = false)
     private User receiver;
 
+    @Column(name = "timestamp", nullable = false, length = 45)
+    private String timestamp;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
     public User getReceiver() {
         return receiver;
     }
