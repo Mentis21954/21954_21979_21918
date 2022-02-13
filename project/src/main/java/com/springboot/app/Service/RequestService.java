@@ -36,7 +36,7 @@ public class RequestService implements RequestServiceInterface{
 
     public List<Request> getStudentRequests(Long id) {
         List<Request> requestlist =  repoReq.findAll();
-        for(int i=0 ; i<requestlist.size(); i++) {
+        for(int i=requestlist.size()-1; i>=0 ; i--) {
             if(!requestlist.get(i).getSender().getId().equals(id)) {
                 requestlist.remove(i);
             }
@@ -46,7 +46,7 @@ public class RequestService implements RequestServiceInterface{
 
     public List<Request> getTeacherRequests(Long id) {
         List<Request> requestlist =  repoReq.findAll();
-        for(int i=0 ; i<requestlist.size(); i++) {
+        for(int i=requestlist.size()-1; i>=0 ; i--) {
             if(!requestlist.get(i).getReceiver().getId().equals(id)) {
                 requestlist.remove(i);
             }

@@ -23,17 +23,21 @@
 
             <tbody>
             <td>
-            <select name="Purpose" th:field="*{purpose}" >
+            <select name="Purpose" th:field="*{purpose}" required>
                 <option value="Work">Work</option>
                 <option value="School">School</option>
             </select>
             </td>
             <td>
+
             <div class="col-8" th:field="${userList}">
-                <th:block th:each="u: ${userList}">
-                    <input type="checkbox" th:field="*{receiver}"
-                           th:text="${u.username}" th:value="${u.id}" class="m-2" required/>
-                </th:block>
+
+                <select th:field="*{receiver}" class="form-control select-checkbox" id="WhatToUpdate" multiple="multiple" required>
+                    <th:block th:each="idsAndText : ${userList}">
+                        <option th:each="text : ${idsAndText.username}" th:field="*{receiver}" th:value="${idsAndText.id}" th:text="${text}"/>
+                    </th:block>
+                </select>
+
             </div>
             </td>
             </tbody>
@@ -42,6 +46,7 @@
             <input type="hidden" th:field="*{status}">
             <input type="hidden" th:field="*{id}">
         </div>
+
 
         </table>
             <td colspan="2">

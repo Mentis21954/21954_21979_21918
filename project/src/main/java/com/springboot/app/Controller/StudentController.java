@@ -120,7 +120,7 @@ public class StudentController {
         User user = getLoginUser();
         List<Request> requestList = requestService.getStudentRequests(user.getId());
 
-        for(int i=0 ; i<requestList.size() ; i++) {
+        for(int i=requestList.size()-1; i>=0 ; i--) {
             if(requestList.get(i).getStatus().equals("Pending")) {
                 requestList.remove(i);
             }

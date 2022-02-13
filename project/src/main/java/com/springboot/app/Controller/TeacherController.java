@@ -58,7 +58,7 @@ public class TeacherController {
         User user = getLoginUser();
         List<Request> requestList = requestService.getTeacherRequests(user.getId());
 
-        for(int i=0 ; i<requestList.size() ; i++) {
+        for(int i=requestList.size()-1; i>=0 ; i--) {
             if(requestList.get(i).getStatus().equals("Pending")) {
                 requestList.remove(i);
             }
