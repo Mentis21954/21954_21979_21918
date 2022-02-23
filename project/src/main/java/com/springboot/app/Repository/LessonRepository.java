@@ -16,5 +16,8 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
     @Query("SELECT r FROM Lesson r WHERE r.requests.sender.id = ?1")
     public List<Lesson> getStudentLesson(Long id) ;
 
+    @Query("SELECT r FROM Lesson r WHERE r.requests.receiver.id = ?1")
+    public List<Lesson> getTeacherLesson(Long id) ;
+
 
 }

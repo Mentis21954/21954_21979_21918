@@ -18,4 +18,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     @Query("SELECT r FROM Request r WHERE r.id = ?1")
     public Request getRequestById( Long id) ;
 
+    @Query("SELECT r FROM Request r WHERE r.receiver.id = ?1")
+    public List<Request> getTeachersRequests( Long id) ;
+
 }

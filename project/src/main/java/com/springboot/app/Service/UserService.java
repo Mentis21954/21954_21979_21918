@@ -74,8 +74,12 @@ public class UserService implements UserServiceInterface {
     @Override
     public void delete(Long id) {
         List<Lesson> lessons = repoLesson.getStudentLesson(id);
+        List<Lesson> lessons2 = repoLesson.getTeacherLesson(id);
         for(int i =0 ; i<lessons.size();i++){
             repoLesson.deleteById(lessons.get(i).getId());
+        }
+        for(int i =0 ; i<lessons2.size();i++){
+            repoLesson.deleteById(lessons2.get(i).getId());
         }
 
         List<RecommendationLetter> recommendationLetters = letterRepository.getStudentLettersById(id);
@@ -88,8 +92,12 @@ public class UserService implements UserServiceInterface {
         }
 
         List<Request> requestList = requestRepository.getStudentRequests(id);
+        List<Request> requestList2 = requestRepository.getTeachersRequests(id);
         for(int i =0 ; i<requestList.size();i++){
             requestRepository.deleteById(requestList.get(i).getId());
+        }
+        for(int i =0 ; i<requestList2.size();i++){
+            requestRepository.deleteById(requestList2.get(i).getId());
         }
 
         repoUser.getUserById(id).removeRoles();
